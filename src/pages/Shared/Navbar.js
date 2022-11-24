@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../../images/logo.png';
 
 const Navbar = () => {
     const menuItem = <React.Fragment>
@@ -21,6 +22,7 @@ const Navbar = () => {
                             }
                         </ul>
                     </div>
+                    <img className='w-10' src={logo} alt="" />
                     <Link className="btn btn-ghost normal-case text-xl">WatchBD</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">

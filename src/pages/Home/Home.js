@@ -45,7 +45,7 @@ const Home = () => {
 
             </div> */}
 
-            {/* extra section  */}
+            {/* extra one section  */}
             <div className='mt-8 grid gap-6 grid-cols-1 lg:grid-cols-2'>
                 <div>
                     <img src={delivery} className='rounded-lg' alt="" />
