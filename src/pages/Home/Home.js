@@ -10,14 +10,14 @@ import ProductCategory from '../ProductCategory/ProductCategory';
 
 const Home = () => {
     const { data: productsCategory = [] } = useQuery({
-            queryKey: ['products'],
-            queryFn: async () => {
-                const res = await fetch('http://localhost:5000/products')
-                const data = await res.json();
-                return data;
-    
-            }
-        })
+        queryKey: ['products'],
+        queryFn: async () => {
+            const res = await fetch('http://localhost:5000/products')
+            const data = await res.json();
+            return data;
+
+        }
+    })
 
     const sliderItem = [
         {
@@ -47,19 +47,21 @@ const Home = () => {
             <div className="carousel w-full rounded-lg">
                 {
                     sliderItem.map(slider => <Slider
-                    key={slider.id}
-                    slider={slider}></Slider>)
+                        key={slider.id}
+                        slider={slider}></Slider>)
                 }
             </div>
 
             {/* category section  */}
             <div className='mt-10'>
                 <h1 className='text-4xl font-bold text-center'>WATCHES CATEGORIES</h1>
-                {
-                   productsCategory.map(category => <ProductCategory
-                   key={category._id}
-                   category={category}></ProductCategory>)
-                }
+                <div className='mt-8 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
+                    {
+                        productsCategory.map(category => <ProductCategory
+                            key={category._id}
+                            category={category}></ProductCategory>)
+                    }
+                </div>
             </div>
 
             {/* extra one section  */}
@@ -77,7 +79,7 @@ const Home = () => {
                     <p className='text-xl font-semibold pb-5'>Our secure payment</p>
                     <p className='text-lg font-thin'>As part of a secure payment, your credit card number, expiry date and cryptogram are encrypted in the transmission to protect you and ensure that no data flows in the clear via the internet.</p>
                 </div>
-                
+
             </div>
         </div>
     );
