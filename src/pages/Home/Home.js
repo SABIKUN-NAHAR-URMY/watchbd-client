@@ -5,8 +5,20 @@ import img3 from '../../images/img3.jpg';
 import delivery from '../../images/delivery.jpg';
 import paymentSecure from '../../images/paymentSecure.jpg';
 import Slider from './Slider/Slider';
+import { useQuery } from '@tanstack/react-query';
+import ProductCategory from '../ProductCategory/ProductCategory';
 
 const Home = () => {
+    const { data: productsCategory = [] } = useQuery({
+            queryKey: ['products'],
+            queryFn: async () => {
+                const res = await fetch('http://localhost:5000/products')
+                const data = await res.json();
+                return data;
+    
+            }
+        })
+
     const sliderItem = [
         {
             image: img1,
@@ -40,10 +52,15 @@ const Home = () => {
                 }
             </div>
 
-            {/* category section 
-            <div>
-
-            </div> */}
+            {/* category section  */}
+            <div className='mt-10'>
+                <h1 className='text-4xl font-bold text-center'>WATCHES CATEGORIES</h1>
+                {
+                   productsCategory.map(category => <ProductCategory
+                   key={category._id}
+                   category={category}></ProductCategory>)
+                }
+            </div>
 
             {/* extra one section  */}
             <div className='mt-8 grid gap-6 grid-cols-1 lg:grid-cols-2'>
