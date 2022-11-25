@@ -45,7 +45,7 @@ const Login = () => {
                         {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
                         <p className='text-red-600'>{loginError}</p>
                     </div>
-                    <label className="label"><span className="label-text">Forget Password?</span></label>
+                    
                     <input className='btn w-full mt-5' value='Login' type="submit" />
                 </form>
                 <p className='text-sm text-center'>New to WatchBD? <Link className='text-secondary' to='/signup'>Create New Account</Link></p>
