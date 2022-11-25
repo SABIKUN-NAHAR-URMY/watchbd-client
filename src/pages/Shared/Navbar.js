@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import logo from '../../images/logo.png';
 
 const Navbar = () => {
+    const {user, logOut} = useContext(AuthContext);
+    const handelLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(err => console.error(err))
+    }
     const menuItem = <React.Fragment>
         <li className='text-xl font-semibold'><Link to='/'>Home</Link></li>
         <li className='text-xl font-semibold'><Link to='/blog'>Blog</Link></li>
-        <li className='text-xl font-semibold'><Link to='/login'>Login</Link></li>
-        <li className='text-xl font-semibold'><Link to='/dashboard'>Dashboard</Link></li>
+        {
+            user?.uid ?
+                <>
+                    <li className='text-xl font-semibold'><Link to='/dashboard'>Dashboard</Link></li>
+                    <li className='text-xl font-semibold'><button onClick={handelLogOut}>Sing Out</button></li>
+                </>
+                :
+                <li className='text-xl font-semibold'><Link to='/login'>Login</Link></li>
+        }
     </React.Fragment>
     return (
         <div>

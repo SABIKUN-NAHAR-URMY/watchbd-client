@@ -3,8 +3,8 @@ import { useLoaderData } from 'react-router-dom';
 import ProductDisplay from './ProductDisplay/ProductDisplay';
 
 const Products = () => {
-    const data = useLoaderData();
-    const products = data.products;
+    const products = useLoaderData();
+    console.log(products);
     return (
         <div className='grid gap-6 grid-cols-1 lg:grid-cols-2 mt-10 mb-10'>
             {
