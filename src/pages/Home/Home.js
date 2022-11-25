@@ -6,7 +6,7 @@ import delivery from '../../images/delivery.jpg';
 import paymentSecure from '../../images/paymentSecure.jpg';
 import Slider from './Slider/Slider';
 import { useQuery } from '@tanstack/react-query';
-import ProductCategory from '../ProductCategory/ProductCategory';
+import ProductCategory from './ProductCategory/ProductCategory';
 
 const Home = () => {
     const { data: productsCategory = [] } = useQuery({
@@ -58,8 +58,8 @@ const Home = () => {
                 <div className='mt-8 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
                     {
                         productsCategory.map(category => <ProductCategory
-                            key={category._id}
-                            category={category}></ProductCategory>)
+                        key={category._id}
+                        category={category}></ProductCategory>)
                     }
                 </div>
             </div>
