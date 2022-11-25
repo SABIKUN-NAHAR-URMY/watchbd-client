@@ -3,13 +3,10 @@ import React from 'react';
 const ProductCategory = ({ category }) => {
     const {name, imgURL} = category;
     return (
-        <div className="card w-96 bg-base-100 shadow-xl image-full">
+        <div className="card w-96 h-56 image-full">
             <figure><img src={imgURL} alt="Shoes" /></figure>
             <div className="card-body">
-                <h2 className="card-title">{name}</h2>
-                <div className="card-actions justify-end">
-                    <button className="btn">See Product</button>
-                </div>
+                <h2 className="text-4xl font-bold flex items-center justify-center pt-11">{name}</h2>
             </div>
         </div>
     );
