@@ -2,27 +2,41 @@ import React from 'react';
 
 const ProductDisplay = ({ product }) => {
     const { picture, description, location, mobileNumber, originalPrice, postedDate, productName, rating, resalePrice, sellerName, status, yearsUse } = product;
+    
     return (
         <div className="card bg-base-100 shadow-xl">
             <figure><img src={picture} alt="Shoes" /></figure>
             <div className="card-body">
-                <h2 className="card-title">{productName}</h2>
-                <div className='flex justify-evenly'>
-                    <p className=''>Seller: {sellerName}</p>
-                    <p>{status}</p>
-                    <p>{location}</p>
-                </div>
-                
-                <p>{mobileNumber}</p>
-                <p>{originalPrice}</p>
-                <p>{resalePrice}</p>
-                <p>{postedDate}</p>
-                {/* <p>{rating}</p> */}
+                <h2 className="card-title pb-5">{productName}</h2>
+                <div className='text-lg'>
+                    <div className='flex justify-evenly font-semibold pb-5'>
+                        <p>Seller: {sellerName}</p>
+                        <p>{status}</p>
+                        <p>Location: {location}</p>
+                    </div>
 
-                <p>{yearsUse}</p>
-                <p>{description}</p>
-                <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Book Now</button>
+                    <div className='flex justify-between font-thin pb-5'>
+                    <p>Phone: {mobileNumber}</p>
+                    <p>Rating:  
+                    <select>
+                            <option>{rating[1]}</option>
+                            <option>{rating[2]}</option>
+                            <option>{rating[3]}</option>
+                        </select>
+                    </p>
+                    </div>
+
+                    <div className='flex justify-evenly font-thin pb-5'>
+                        <p>OriginalPrice:  ${originalPrice}</p>
+                        <p>ResalePrice:  ${resalePrice}</p>
+                    </div>
+
+                    <p><strong>Description:</strong> <span className='font-thin'>{description}</span></p>
+                </div>
+                <div className="card-actions justify-end items-center">
+                    <p>PostedDate: {postedDate}</p>
+                    <p>YearOfUses: {yearsUse} year</p>
+                    <button className="btn">Book Now</button>
                 </div>
             </div>
         </div>

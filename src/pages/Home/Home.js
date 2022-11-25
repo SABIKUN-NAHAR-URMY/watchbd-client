@@ -7,17 +7,21 @@ import paymentSecure from '../../images/paymentSecure.jpg';
 import Slider from './Slider/Slider';
 import { useQuery } from '@tanstack/react-query';
 import ProductCategory from './ProductCategory/ProductCategory';
+import Loading from '../Loading/Loading';
 
 const Home = () => {
-    const { data: productsCategory = [] } = useQuery({
+    const { data: productsCategory = [], isLoading} = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/products')
             const data = await res.json();
             return data;
-
         }
     })
+
+    if(isLoading){
+        return <Loading></Loading>
+    }
 
     const sliderItem = [
         {
