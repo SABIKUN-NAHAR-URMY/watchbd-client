@@ -1,9 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
+import AllBuyers from "../../pages/AllBuyers/AllBuyers";
+import AllSellers from "../../pages/AllSellers/AllSellers";
 import Blog from "../../pages/Blog/Blog";
 import DashboardLayout from "../../pages/DashboardLayout/DashboardLayout";
 import Home from "../../pages/Home/Home";
 import Login from "../../pages/Login/Login";
 import Main from "../../pages/Main/Main";
+import MyOrders from "../../pages/MyOrders/MyOrders";
 import Products from "../../pages/Products/Products";
 import Signup from "../../pages/Signup/Signup";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
@@ -38,21 +41,21 @@ export const router = createBrowserRouter([
     },
     {
         path:'/dashboard',
-        element: <DashboardLayout></DashboardLayout>
+        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         // errorElement: <ErrorPage></ErrorPage>,
-        // children:[
-        //     {
-        //         path:'/dashboard',
-        //         element: 
-        //     }
-            // {
-            //     path:'/dashboard/allusers',
-            //     element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
-            // },
-            // {
-            //     path:'/dashboard/adddoctor',
-            //     element: <AdminRoute><AddDoctor></AddDoctor></AdminRoute>
-            // },
+        children:[
+            {
+                path:'/dashboard',
+                element: <MyOrders></MyOrders>  
+            },
+            {
+                path:'/dashboard/allSellers',
+                element: <AllSellers></AllSellers>
+            },
+            {
+                path:'/dashboard/allBuyers',
+                element: <AllBuyers></AllBuyers>
+            }
             // {
             //     path:'/dashboard/manageDoctors',
             //     element: <AdminRoute><ManageDoctor></ManageDoctor></AdminRoute>
@@ -62,6 +65,6 @@ export const router = createBrowserRouter([
             //     element: <Payment></Payment>,
             //     loader: ({params}) => fetch(`http://localhost:5000/bookings/${params.id}`)
             // }
-        // ]
+        ]
     }
 ])
