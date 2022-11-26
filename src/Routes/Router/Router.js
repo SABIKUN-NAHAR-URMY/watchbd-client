@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import AddProduct from "../../pages/AddProduct/AddProduct";
 import AllBuyers from "../../pages/AllBuyers/AllBuyers";
 import AllSellers from "../../pages/AllSellers/AllSellers";
 import Blog from "../../pages/Blog/Blog";
@@ -7,6 +8,7 @@ import Home from "../../pages/Home/Home";
 import Login from "../../pages/Login/Login";
 import Main from "../../pages/Main/Main";
 import MyOrders from "../../pages/MyOrders/MyOrders";
+import MyProduct from "../../pages/MyProduct/MyProduct";
 import Products from "../../pages/Products/Products";
 import Signup from "../../pages/Signup/Signup";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
@@ -55,16 +57,16 @@ export const router = createBrowserRouter([
             {
                 path:'/dashboard/allBuyers',
                 element: <AllBuyers></AllBuyers>
+            },
+            {
+                path:'/dashboard/addProduct',
+                element: <AddProduct></AddProduct>
+            },
+            {
+                path:'/dashboard/myProduct',
+                element: <MyProduct></MyProduct>
             }
-            // {
-            //     path:'/dashboard/myOrders',
-            //     element: 
-            // },
-            // {
-            //     path:'/dashboard/payment/:id',
-            //     element: <Payment></Payment>,
-            //     loader: ({params}) => fetch(`http://localhost:5000/bookings/${params.id}`)
-            // }
+            
         ]
     }
 ])

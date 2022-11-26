@@ -2,7 +2,8 @@ import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
-const BooknowModal = ({ bookNow }) => {
+const BooknowModal = ({ bookNow,  setBookNow }) => {
+    console.log(bookNow);
     const { user } = useContext(AuthContext);
     const { productName, resalePrice } = bookNow;
 
@@ -37,6 +38,7 @@ const BooknowModal = ({ bookNow }) => {
                 console.log(data);
                 if (data.acknowledged) {
                     toast.success('Item is Booked');
+                    setBookNow(null);
                 }
                 else{
                     // window.location.reload();
@@ -50,7 +52,7 @@ const BooknowModal = ({ bookNow }) => {
             <input type="checkbox" id="booknow-modal" className="modal-toggle" />
             <div className="modal">
                 <div className="modal-box relative">
-                    <label htmlFor="booknow-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <label onClick={()=>setBookNow(null)} htmlFor="booknow-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <form onSubmit={handelBook} className='grid grid-cols-1 gap-3'>
                         <input name='itemName' type="text" defaultValue={productName} disabled placeholder="Item Name" className="input input-bordered w-full" />
                         <input name='name' type="text" defaultValue={user?.displayName} disabled placeholder="Your Name" className="input input-bordered w-full" />
