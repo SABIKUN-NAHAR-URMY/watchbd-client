@@ -13,7 +13,7 @@ const useUsers = email => {
                 });
         }
         else if(email){
-            fetch(`http://localhost:5000/users/admin/${email}`)
+            fetch(`http://localhost:5000/users/seller/${email}`)
                 .then(res => res.json())
                 .then(data => {
                     setIsSeller(data.isSeller);
@@ -21,7 +21,7 @@ const useUsers = email => {
         }
 
         else if(email){
-            fetch(`http://localhost:5000/users/admin/${email}`)
+            fetch(`http://localhost:5000/users/buyer/${email}`)
                 .then(res => res.json())
                 .then(data => {
                     setIsBuyer(data.isBuyer);
