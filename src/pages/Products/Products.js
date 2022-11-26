@@ -5,7 +5,6 @@ import ProductDisplay from './ProductDisplay/ProductDisplay';
 
 const Products = () => {
     const products = useLoaderData();
-    console.log(products);
     const [bookNow, setBookNow] = useState(null);
     return (
         <section>

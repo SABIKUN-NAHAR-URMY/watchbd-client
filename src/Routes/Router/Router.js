@@ -65,6 +65,10 @@ export const router = createBrowserRouter([
             {
                 path:'/dashboard/myProduct',
                 element: <MyProduct></MyProduct>
+            },
+            {
+                path:'/dashboard/payment/:id',
+                element: <MyProduct></MyProduct>
             }
             
         ]

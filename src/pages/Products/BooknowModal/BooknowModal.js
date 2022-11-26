@@ -5,7 +5,7 @@ import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 const BooknowModal = ({ bookNow,  setBookNow }) => {
     console.log(bookNow);
     const { user } = useContext(AuthContext);
-    const { productName, resalePrice } = bookNow;
+    const { productName, resalePrice, picture } = bookNow;
 
     const handelBook = event => {
         event.preventDefault();
@@ -14,6 +14,7 @@ const BooknowModal = ({ bookNow,  setBookNow }) => {
         const name = form.name.value;
         const itemName = form.itemName.value;
         const price = form.price.value;
+        const picture = form.picture.value;
         const phone = form.phone.value;
         const location = form.location.value;
 
@@ -22,6 +23,7 @@ const BooknowModal = ({ bookNow,  setBookNow }) => {
             name,
             itemName,
             price,
+            picture,
             phone,
             location
         }
@@ -41,7 +43,6 @@ const BooknowModal = ({ bookNow,  setBookNow }) => {
                     setBookNow(null);
                 }
                 else{
-                    // window.location.reload();
                     toast.error('Already booked this Item');
                 }
             })
@@ -58,6 +59,7 @@ const BooknowModal = ({ bookNow,  setBookNow }) => {
                         <input name='name' type="text" defaultValue={user?.displayName} disabled placeholder="Your Name" className="input input-bordered w-full" />
                         <input name='email' type="email" defaultValue={user?.email} disabled placeholder="Email Address" className="input input-bordered w-full" />
                         <input name='price' type="text" defaultValue={resalePrice} disabled placeholder="ResalePrice" className="input input-bordered w-full" />
+                        <input name='picture' type="text" defaultValue={picture} disabled placeholder="picture" className="input input-bordered w-full" />
                         <input name='phone' type="text" placeholder="Phone Number" className="input input-bordered w-full" />
                         <input name='location' type="text" placeholder="Location" className="input input-bordered w-full" />
                         <input type="submit" value="Submit" className="btn input-bordered w-full" />

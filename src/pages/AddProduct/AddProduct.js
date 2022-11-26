@@ -8,7 +8,7 @@ const AddProduct = () => {
     const imageHostKey = process.env.REACT_APP_imgbbKey;
 
     const navigate = useNavigate();
-    
+
 
     const handelAddProduct = data => {
         console.log(data);
@@ -23,9 +23,9 @@ const AddProduct = () => {
             .then(res => res.json())
             .then(imgData => {
                 console.log(imgData.data.url);
-                if(imgData.success){
+                if (imgData.success) {
                     console.log(imgData.data.url);
-    
+
                     const product = {
                         category_id: parseInt(data.category_id),
                         picture: imgData.data.url,
@@ -40,28 +40,29 @@ const AddProduct = () => {
                         rating: data.rating,
                         mobileNumber: data.mobileNumber,
                         description: data.description,
-                        sell: data.sell
+                        sell: data.sell,
+                        email: data.email
                     }
-    
-                    fetch('http://localhost:5000/products',{
+
+                    fetch('http://localhost:5000/products', {
                         method: 'POST',
                         headers: {
-                            'content-type' : 'application/json',
+                            'content-type': 'application/json',
                             // authorization : `bearer ${localStorage.getItem('Token')}`
                         },
                         body: JSON.stringify(product)
                     })
-                    .then(res => res.json())
-                    .then(result => {
-                        console.log(result);
-                        if(result.acknowledged){
-                            toast.success(`Product added successfully`);
-                            navigate(`/products/${data.category_id}`);
-                        }
-                    })
+                        .then(res => res.json())
+                        .then(result => {
+                            console.log(result);
+                            if (result.acknowledged) {
+                                toast.success(`Product added successfully`);
+                                navigate(`/products/${data.category_id}`);
+                            }
+                        })
                 }
             })
-        }
+    }
 
     return (
         <div className='w-96 p-7 '>
@@ -131,13 +132,13 @@ const AddProduct = () => {
                 <div className="form-control w-full">
                     <label className="label"><span className="label-text">Posted Date</span></label>
                     <input
-                    {...register("postedDate")} 
-                    className="input input-bordered w-full"
-                    type="datetime-local"
+                        {...register("postedDate")}
+                        className="input input-bordered w-full"
+                        type="datetime-local"
                     // selected={startDate} 
                     // onChange={(date) => setStartDate(date)}
                     // postedDate={date}
-                     />
+                    />
 
                     {/* {errors.selected && <p className='text-red-600'>{errors.selected?.message}</p>} */}
                 </div>
@@ -145,9 +146,9 @@ const AddProduct = () => {
                 <div className="form-control w-full">
                     <label className="label"><span className="label-text">Seller Name</span></label>
                     <input type="text"
-                    {...register("sellerName", 
-                    { required: "sellerName is required" })} 
-                    className="input input-bordered w-full" />
+                        {...register("sellerName",
+                            { required: "sellerName is required" })}
+                        className="input input-bordered w-full" />
                     {errors.sellerName && <p className='text-red-600'>{errors.sellerName?.message}</p>}
                 </div>
                 {/* Status  */}
@@ -193,7 +194,14 @@ const AddProduct = () => {
                         <option sell="available">Available</option>
                     </select>
                 </div>
-
+                {/* email */}
+                <div className="form-control w-full">
+                    <label className="label"><span className="label-text">Email Address</span></label>
+                    <input type="email"
+                        {...register("email",
+                            { required: "Email address is required" })} className="input input-bordered w-full" />
+                    {errors.email && <p className='text-red-600'>{errors.email?.message}</p>}
+                </div>
 
                 <input className='btn w-full mt-5' value='Add Product' type="submit" />
 

@@ -17,13 +17,7 @@ const ProductDisplay = ({ product, setBookNow }) => {
 
                     <div className='flex justify-between font-thin pb-5'>
                         <p>Phone: {mobileNumber}</p>
-                        <p>Rating:{rating[1]}</p>
-                            {/* <select>
-                                <option>{rating[1]}</option>
-                                <option>{rating[2]}</option>
-                                <option>{rating[3]}</option>
-                            </select> */}
-                       
+                        <p>Rating:{rating}</p>
                     </div>
                     <p className='pb-3'>Available/Sold: {sell}</p>
 
