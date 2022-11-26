@@ -1,27 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import toast from 'react-hot-toast';
 
 const AddProduct = () => {
-    const [startDate, setStartDate] = useState(new Date());
-
     const { register, formState: { errors }, handleSubmit } = useForm();
     const imageHostKey = process.env.REACT_APP_imgbbKey;
 
     const navigate = useNavigate();
-    // const { data: products, isLoading } = useQuery({
-    //     queryKey: ['products'],
-    //     queryFn: async () => {
-    //         const res = await fetch('http://localhost:5000/appointmentSpecialty');
-    //         const data = await res.json();
-    //         return (data);
-    //     }
-    // })
+    
 
     const handelAddProduct = data => {
-        const image = data.img[0];
+        console.log(data);
+        const image = data.picture[0];
         const formData = new FormData();
         formData.append('image', image);
         const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
@@ -31,66 +22,72 @@ const AddProduct = () => {
         })
             .then(res => res.json())
             .then(imgData => {
-                console.log(data);
-                if (imgData.success) {
+                console.log(imgData.data.url);
+                if(imgData.success){
                     console.log(imgData.data.url);
+    
+                    const product = {
+                        category_id: parseInt(data.category_id),
+                        picture: imgData.data.url,
+                        productName: data.productName,
+                        location: data.location,
+                        resalePrice: data.resalePrice,
+                        originalPrice: data.originalPrice,
+                        yearsUse: data.yearsUse,
+                        postedDate: data.postedDate,
+                        sellerName: data.sellerName,
+                        status: data.status,
+                        rating: data.rating,
+                        mobileNumber: data.mobileNumber,
+                        description: data.description,
+                        sell: data.sell
+                    }
+    
+                    fetch('http://localhost:5000/products',{
+                        method: 'POST',
+                        headers: {
+                            'content-type' : 'application/json',
+                            // authorization : `bearer ${localStorage.getItem('Token')}`
+                        },
+                        body: JSON.stringify(product)
+                    })
+                    .then(res => res.json())
+                    .then(result => {
+                        console.log(result);
+                        if(result.acknowledged){
+                            toast.success(`Product added successfully`);
+                            navigate(`/products/${data.category_id}`);
+                        }
+                    })
                 }
             })
-
-        //         const product = {
-        //             category_id: data.
-        //             name: data.name,
-        //             email: data.email,
-        //             specialty: data.specialty,
-        //             image: imgData.data.url
-        //         }
-
-        //         fetch('http://localhost:5000/doctors',{
-        //             method: 'POST',
-        //             headers: {
-        //                 'content-type' : 'application/json',
-        //                 authorization : `bearer ${localStorage.getItem('Token')}`
-        //             },
-        //             body: JSON.stringify(doctor)
-        //         })
-        //         .then(res => res.json())
-        //         .then(result => {
-        //             console.log(result);
-        //             if(result.acknowledged){
-        //                 toast.success(`${data.name} Doctor added successfully`);
-        //                 navigate('/dashboard/manageDoctors');
-        //             }
-        //         })
-        //     }
-        // })
-    }
-
-    // if(isLoading){
-    //     return <Loading></Loading>
-    // }
+        }
 
     return (
         <div className='w-96 p-7 '>
             <h3 className="text-3xl">Add A Product</h3>
 
             <form onSubmit={handleSubmit(handelAddProduct)}>
+                {/* category_id */}
                 <div className="form-control w-full">
                     <label className="label"><span className="label-text">Category</span></label>
-                    <select {...register("value",
-                        { required: "Category Id is required" })} className="input input-bordered w-full">
-                        <option value="1">Women's Watches</option>
-                        <option value="2">Men's Watches</option>
-                        <option value="3">Kid's Watches</option>
+                    <select {...register("category_id",
+                        { required: "Category is required" })} className="input input-bordered w-full">
+                        <option category_id="1">1</option>
+                        <option category_id="2">2</option>
+                        <option category_id="3">3</option>
                     </select>
                     {errors.category_id && <p className='text-red-600'>{errors.category_id?.message}</p>}
                 </div>
+                {/* Picture */}
                 <div className="form-control w-full">
-                    <label className="label"><span className="label-text">Photo</span></label>
+                    <label className="label"><span className="label-text">Picture</span></label>
                     <input type="file"
-                        {...register("img",
-                            { required: "Photo is required" })} className="input input-bordered w-full" />
-                    {errors.img && <p className='text-red-600'>{errors.img?.message}</p>}
+                        {...register("picture",
+                            { required: "Picture is required" })} className="input input-bordered w-full" />
+                    {errors.picture && <p className='text-red-600'>{errors.picture?.message}</p>}
                 </div>
+                {/* productName */}
                 <div className="form-control w-full">
                     <label className="label"><span className="label-text">Product Name</span></label>
                     <input type="text"
@@ -98,6 +95,7 @@ const AddProduct = () => {
                             { required: "productName is required" })} className="input input-bordered w-full" />
                     {errors.productName && <p className='text-red-600'>{errors.productName?.message}</p>}
                 </div>
+                {/* Location */}
                 <div className="form-control w-full">
                     <label className="label"><span className="label-text">Location</span></label>
                     <input type="text"
@@ -105,6 +103,7 @@ const AddProduct = () => {
                             { required: "location is required" })} className="input input-bordered w-full" />
                     {errors.location && <p className='text-red-600'>{errors.location?.message}</p>}
                 </div>
+                {/* Resale Price  */}
                 <div className="form-control w-full">
                     <label className="label"><span className="label-text">Resale Price</span></label>
                     <input type="text"
@@ -112,6 +111,7 @@ const AddProduct = () => {
                             { required: "resalePrice is required" })} className="input input-bordered w-full" />
                     {errors.resalePrice && <p className='text-red-600'>{errors.resalePrice?.message}</p>}
                 </div>
+                {/* Original price  */}
                 <div className="form-control w-full">
                     <label className="label"><span className="label-text">Original Price</span></label>
                     <input type="text"
@@ -119,6 +119,7 @@ const AddProduct = () => {
                             { required: "originalPrice is required" })} className="input input-bordered w-full" />
                     {errors.originalPrice && <p className='text-red-600'>{errors.originalPrice?.message}</p>}
                 </div>
+                {/* yearsUse */}
                 <div className="form-control w-full">
                     <label className="label"><span className="label-text">YearsUse</span></label>
                     <input type="text"
@@ -126,39 +127,49 @@ const AddProduct = () => {
                             { required: "yearsUse is required" })} className="input input-bordered w-full" />
                     {errors.yearsUse && <p className='text-red-600'>{errors.yearsUse?.message}</p>}
                 </div>
+                {/* Posted date  */}
                 <div className="form-control w-full">
                     <label className="label"><span className="label-text">Posted Date</span></label>
-                    <DatePicker 
-                    {...register("selected",
-                    { required: "Date is required" })} 
+                    <input
+                    {...register("postedDate")} 
                     className="input input-bordered w-full"
-                    selected={startDate} 
-                    onChange={(date) => setStartDate(date)} />
+                    type="datetime-local"
+                    // selected={startDate} 
+                    // onChange={(date) => setStartDate(date)}
+                    // postedDate={date}
+                     />
 
-                    {errors.selected && <p className='text-red-600'>{errors.selected?.message}</p>}
+                    {/* {errors.selected && <p className='text-red-600'>{errors.selected?.message}</p>} */}
                 </div>
+                {/* seller name  */}
                 <div className="form-control w-full">
                     <label className="label"><span className="label-text">Seller Name</span></label>
                     <input type="text"
-                        {...register("sellerName",
-                            { required: "sellerName is required" })} className="input input-bordered w-full" />
+                    {...register("sellerName", 
+                    { required: "sellerName is required" })} 
+                    className="input input-bordered w-full" />
                     {errors.sellerName && <p className='text-red-600'>{errors.sellerName?.message}</p>}
                 </div>
+                {/* Status  */}
                 <div className="form-control w-full">
                     <label className="label"><span className="label-text">Status</span></label>
-                    <input type="text" defaultValue={'Unverified'}
-                        {...register("defaultValue")} className="input input-bordered w-full" />
+                    <select {...register("status",
+                        { required: "status is required" })} className="input input-bordered w-full">
+                        <option status="Unverified">Unverified</option>
+                    </select>
                 </div>
+                {/* Ratings  */}
                 <div className="form-control w-full">
                     <label className="label"><span className="label-text">Rating</span></label>
-                    <select {...register("value",
-                        { required: "Category Id is required" })} className="input input-bordered w-full">
-                        <option value="Excellent">Excellent</option>
-                        <option value="Good">Good</option>
-                        <option value="Fair">Fair</option>
+                    <select {...register("rating",
+                        { required: "rating is required" })} className="input input-bordered w-full">
+                        <option rating="Excellent">Excellent</option>
+                        <option rating="Good">Good</option>
+                        <option rating="Fair">Fair</option>
                     </select>
                     {errors.rating && <p className='text-red-600'>{errors.rating?.message}</p>}
                 </div>
+                {/* mobileNumber */}
                 <div className="form-control w-full">
                     <label className="label"><span className="label-text">Mobile Number</span></label>
                     <input type="text"
@@ -166,6 +177,7 @@ const AddProduct = () => {
                             { required: "mobileNumber is required" })} className="input input-bordered w-full" />
                     {errors.mobileNumber && <p className='text-red-600'>{errors.mobileNumber?.message}</p>}
                 </div>
+                {/* Description  */}
                 <div className="form-control w-full">
                     <label className="label"><span className="label-text">Description</span></label>
                     <input type="text"
@@ -173,10 +185,13 @@ const AddProduct = () => {
                             { required: "description is required" })} className="input input-bordered w-full" />
                     {errors.description && <p className='text-red-600'>{errors.description?.message}</p>}
                 </div>
+                {/* sell */}
                 <div className="form-control w-full">
                     <label className="label"><span className="label-text">Available</span></label>
-                    <input type="text" defaultValue={'available'}
-                        {...register("defaultValue")} className="input input-bordered w-full" />
+                    <select {...register("sell",
+                        { required: "sell is required" })} className="input input-bordered w-full">
+                        <option sell="available">Available</option>
+                    </select>
                 </div>
 
 
