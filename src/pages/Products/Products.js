@@ -6,7 +6,6 @@ import ProductDisplay from './ProductDisplay/ProductDisplay';
 const Products = () => {
     const products = useLoaderData();
     const [bookNow, setBookNow] = useState(null);
-    console.log(products);
     return (
         <section>
             <div className='grid gap-6 grid-cols-1 lg:grid-cols-2 mt-10 mb-10'>

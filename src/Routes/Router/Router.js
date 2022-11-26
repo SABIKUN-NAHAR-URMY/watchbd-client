@@ -45,7 +45,7 @@ export const router = createBrowserRouter([
         // errorElement: <ErrorPage></ErrorPage>,
         children:[
             {
-                path:'/dashboard',
+                path:'/dashboard/myOrders',
                 element: <MyOrders></MyOrders>  
             },
             {
@@ -57,8 +57,8 @@ export const router = createBrowserRouter([
                 element: <AllBuyers></AllBuyers>
             }
             // {
-            //     path:'/dashboard/manageDoctors',
-            //     element: <AdminRoute><ManageDoctor></ManageDoctor></AdminRoute>
+            //     path:'/dashboard/myOrders',
+            //     element: 
             // },
             // {
             //     path:'/dashboard/payment/:id',

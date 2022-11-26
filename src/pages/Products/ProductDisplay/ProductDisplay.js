@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ProductDisplay = ({ product, setBookNow }) => {
-    const { picture, description, location, mobileNumber, originalPrice, postedDate, productName, rating, resalePrice, sellerName, status, yearsUse } = product;
+    const { picture, description, location, mobileNumber, originalPrice, postedDate, productName, rating, resalePrice, sellerName, status, yearsUse, sell } = product;
 
     return (
         <div className="card bg-base-100 shadow-xl">
@@ -17,14 +17,15 @@ const ProductDisplay = ({ product, setBookNow }) => {
 
                     <div className='flex justify-between font-thin pb-5'>
                         <p>Phone: {mobileNumber}</p>
-                        <p>Rating:
-                            <select>
+                        <p>Rating:{rating[1]}</p>
+                            {/* <select>
                                 <option>{rating[1]}</option>
                                 <option>{rating[2]}</option>
                                 <option>{rating[3]}</option>
-                            </select>
-                        </p>
+                            </select> */}
+                       
                     </div>
+                    <p className='pb-3'>Available/Sold: {sell}</p>
 
                     <div className='flex justify-evenly font-thin pb-5'>
                         <p>OriginalPrice:  ${originalPrice}</p>
