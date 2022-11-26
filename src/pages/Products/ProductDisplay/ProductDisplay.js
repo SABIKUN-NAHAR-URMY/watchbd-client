@@ -1,8 +1,8 @@
 import React from 'react';
 
-const ProductDisplay = ({ product }) => {
+const ProductDisplay = ({ product, setBookNow }) => {
     const { picture, description, location, mobileNumber, originalPrice, postedDate, productName, rating, resalePrice, sellerName, status, yearsUse } = product;
-    
+
     return (
         <div className="card bg-base-100 shadow-xl">
             <figure><img src={picture} alt="Shoes" /></figure>
@@ -16,14 +16,14 @@ const ProductDisplay = ({ product }) => {
                     </div>
 
                     <div className='flex justify-between font-thin pb-5'>
-                    <p>Phone: {mobileNumber}</p>
-                    <p>Rating:  
-                    <select>
-                            <option>{rating[1]}</option>
-                            <option>{rating[2]}</option>
-                            <option>{rating[3]}</option>
-                        </select>
-                    </p>
+                        <p>Phone: {mobileNumber}</p>
+                        <p>Rating:
+                            <select>
+                                <option>{rating[1]}</option>
+                                <option>{rating[2]}</option>
+                                <option>{rating[3]}</option>
+                            </select>
+                        </p>
                     </div>
 
                     <div className='flex justify-evenly font-thin pb-5'>
@@ -36,7 +36,7 @@ const ProductDisplay = ({ product }) => {
                 <div className="card-actions justify-end items-center">
                     <p>PostedDate: {postedDate}</p>
                     <p>YearOfUses: {yearsUse} year</p>
-                    <button className="btn">Book Now</button>
+                    <label onClick={()=>setBookNow(product)} htmlFor="booknow-modal" className="btn">Book Now</label>
                 </div>
             </div>
         </div>

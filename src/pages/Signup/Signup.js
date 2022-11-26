@@ -77,14 +77,10 @@ const Signup = () => {
                         {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
                     </div>
                     <div className="form-control w-full mt-3">
-                        <select name="" id="" {...register("text",
-                                {
-                                    required: "Required",
-                                })} className="input input-bordered w-full">
-                            <option value="">Buyer</option>
-                            <option value="">Seller</option>
+                        <select name="" id="" {...register("value")} className="input input-bordered w-full">
+                            <option value="Buyer">Buyer</option>
+                            <option value="Seller">Seller</option>
                         </select>
-                        {errors.text && <p className='text-red-600'>{errors.text?.message}</p>}
                     </div>
                     <input className='btn w-full mt-5' value='Signup' type="submit" />
                     {
