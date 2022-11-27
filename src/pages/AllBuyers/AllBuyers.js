@@ -1,15 +1,35 @@
+import userEvent from '@testing-library/user-event';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 const AllBuyers = () => {
     const [allBuyers, setAllBuyers] = useState([]);
     useEffect(() => {
         axios.get('http://localhost:5000/users/allBuyers')
             .then(data => {
-                console.log(data.data);
                 setAllBuyers(data.data);
             })
     }, [])
+
+    const handelDelete = buyers => {
+        const agree = window.confirm(`Are you sure you want to delete : ${buyers.name} ? `);
+        if(agree){
+            fetch(`http://localhost:5000/users/allBuyers/${buyers._id}`,{
+                method: 'DELETE'
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if(data.deletedCount > 0){
+                    toast.success('User deleted successfully.');
+                    const remainingBuyers = allBuyers.filter(buyer => buyer._id !== buyers._id);
+                    setAllBuyers(remainingBuyers);
+                }
+            })
+        }
+    }
+
     return (
         <div>
             <div className="overflow-x-auto">
@@ -20,8 +40,7 @@ const AllBuyers = () => {
                             <th></th>
                             <th>Name</th>
                             <th>Email Address</th>
-                            <th></th>
-                            <th></th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,8 +49,7 @@ const AllBuyers = () => {
                                 <th>{i+1}</th>
                                 <td>{buyers.name}</td>
                                 <td>{buyers.email}</td>
-                                <td><button className='btn btn-sm'>Delete</button></td>
-                                <td><button className='btn btn-sm'>Verify</button></td>
+                                <td><button onClick={()=>handelDelete(buyers)} className='btn btn-sm'>Delete</button></td>
                               </tr>)
                         }
                         

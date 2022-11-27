@@ -24,8 +24,6 @@ const AddProduct = () => {
             .then(imgData => {
                 console.log(imgData.data.url);
                 if (imgData.success) {
-                    console.log(imgData.data.url);
-
                     const product = {
                         category_id: parseInt(data.category_id),
                         picture: imgData.data.url,
