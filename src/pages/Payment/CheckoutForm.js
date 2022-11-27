@@ -8,7 +8,8 @@ const CheckoutForm = ({ booking }) => {
     const [success, setSuccess] = useState('');
     const [transactionId, setTransactionId] = useState('');
     const [processing, setProcessing] = useState(false);
-    const { _id, price, email, name } = booking;
+    const { bookingId, price, email, name } = booking;
+    // console.log(booking);
 
 
     useEffect(() => {
@@ -71,13 +72,13 @@ const CheckoutForm = ({ booking }) => {
                 price,
                 transactionId: paymentIntent.id,
                 email,
-                bookingId: _id
+                bookingId: bookingId
             }
             fetch('http://localhost:5000/payments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
-                    
+
                 },
                 body: JSON.stringify(payment)
             })

@@ -12,7 +12,7 @@ const Payment = () => {
     if(navigation.state === 'loading'){
         return <Loading></Loading>
     }
-    console.log(booking);
+
     return (
         <div>
             <h2 className="text-3xl mb-5">Payment for {booking.itemName}</h2>
