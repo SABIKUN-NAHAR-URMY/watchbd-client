@@ -9,6 +9,10 @@ const Products = () => {
     const navigation = useNavigation();
     const [bookNow, setBookNow] = useState(null);
 
+    const filtered = products?.filter(product => {
+        return product.paid !== true;
+      }) || [];
+
     if(navigation.state === "loading"){
         return <Loading></Loading>
     }
@@ -16,7 +20,7 @@ const Products = () => {
         <section>
             <div className='grid gap-6 grid-cols-1 lg:grid-cols-2 mt-10 mb-10'>
                 {
-                    products.map((product, i) => <ProductDisplay
+                    filtered.map((product, i) => <ProductDisplay
                         key={i}
                         product={product}
                         setBookNow={setBookNow}

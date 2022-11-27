@@ -6,7 +6,7 @@ import Loading from '../Loading/Loading';
 const MyProduct = () => {
     const { user } = useContext(AuthContext);
     const [myProductAd, setMyProductAd] = useState([]);
-    console.log(myProductAd);
+
     const { data: myProducts = [], isLoading } = useQuery({
         queryKey: ['myProducts'],
         queryFn: async () => {
@@ -41,10 +41,10 @@ const MyProduct = () => {
                                 <th>{i+1}</th>
                                 <td>{myProduct.productName}</td>
                                 {
-                                    myProduct.sell === 'Available' ?
-                                    <td>{myProduct.sell} <button onClick={()=>setMyProductAd(myProduct._id)} className='btn btn-xs'>Ad</button></td>
-                                    :
-                                    <td>Sold</td>
+                                   myProduct.paid === true  ?
+                                   <td>Sold</td>  
+                                   :
+                                   <td>{myProduct.sell} <button onClick={()=>setMyProductAd(myProduct._id)} className='btn btn-xs'>Ad</button></td>
                                 }
                                 <td>{myProduct.originalPrice}</td>
                                 <td>{myProduct.resalePrice}</td>
