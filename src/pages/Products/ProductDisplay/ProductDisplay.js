@@ -1,6 +1,7 @@
 import React from 'react';
 
 const ProductDisplay = ({ product, setBookNow }) => {
+    // console.log(product);
     const { picture, description, location, mobileNumber, originalPrice, postedDate, productName, rating, resalePrice, sellerName, status, yearsUse, sell } = product;
 
     return (

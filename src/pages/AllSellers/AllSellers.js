@@ -6,10 +6,11 @@ const AllSellers = () => {
     useEffect(() => {
         axios.get('http://localhost:5000/users/allSellers')
             .then(data => {
-                console.log(data.data);
                 setAllSellers(data.data);
             })
     }, [])
+
+    console.log(allSellers);
     return (
         <div>
             <div className="overflow-x-auto">

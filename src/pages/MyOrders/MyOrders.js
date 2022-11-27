@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import Loading from '../Loading/Loading';
 
 const MyOrders = () => {
     const { user } = useContext(AuthContext);
@@ -13,6 +14,11 @@ const MyOrders = () => {
             return data;
         }
     })
+
+    if(isLoading){
+        return <Loading></Loading>
+    }
+    
     return (
         <div>
             <div className="overflow-x-auto w-full">
@@ -48,7 +54,7 @@ const MyOrders = () => {
                                         </Link>
                                     }
                                     {
-                                        myOrder.price && myOrder.paid && <span className='font-bold'>Paid</span>
+                                        myOrder.price && myOrder.paid && <span className='text-green-600 font-bold'>Paid</span>
                                     }
                                 </td>
                             </tr>)
