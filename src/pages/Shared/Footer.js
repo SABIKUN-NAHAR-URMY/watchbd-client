@@ -3,7 +3,7 @@ import logo from '../../images/logo.png';
 
 const Footer = () => {
     return (
-        <footer className="footer rounded-lg justify-around items-center mt-14 p-4 bg-slate-200 text-black">
+        <footer className="footer rounded-lg justify-around items-center mt-5 p-4  text-black">
             <div className="items-center grid-flow-col">
                 <img className='w-32' src={logo} alt="" />
                 <p>Copyright © 2022 - All right reserved</p>
