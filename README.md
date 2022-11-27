@@ -14,6 +14,10 @@
 
 # This is my project 
 
+adminEmail: mili@gmail.com
+
+adminPassword: 123456@A
+
 # GitHub code link :
 1. client side: [Github]()
 

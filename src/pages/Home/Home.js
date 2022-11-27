@@ -96,6 +96,7 @@ const Home = () => {
 
             {/* Advertise section  */}
             <div>
+                <h2 className='mt-10 text-center text-xl font-thin'>Please visit our Category Section And Purchase Your Watch </h2>
                 {
                     advertise.map(adv =>
                         <div key={adv._id} className="card card-side bg-base-100 shadow-xl mt-10">
@@ -125,7 +126,6 @@ const Home = () => {
                                 <div className="card-actions justify-end items-center">
                                     <p>PostedDate: {adv.postedDate}</p>
                                     <p>YearOfUses: {adv.yearsUse} year</p>
-                                    <label htmlFor="booknow-modal" className="btn">Book Now</label>
                                 </div>
                             </div>
                         </div>

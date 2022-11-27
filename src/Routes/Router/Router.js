@@ -11,6 +11,7 @@ import MyOrders from "../../pages/MyOrders/MyOrders";
 import MyProduct from "../../pages/MyProduct/MyProduct";
 import Payment from "../../pages/Payment/Payment";
 import Products from "../../pages/Products/Products";
+import ReportedItems from "../../pages/ReportedItems/ReportedItems";
 import ErrorPage from "../../pages/Shared/ErrorPage/ErrorPage";
 import Signup from "../../pages/Signup/Signup";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
@@ -73,6 +74,10 @@ export const router = createBrowserRouter([
                 path:'/dashboard/payment/:id',
                 element: <Payment></Payment>,
                 loader: ({params})=>fetch(`http://localhost:5000/bookings/${params.id}`)
+            },
+            {
+                path:'/dashboard/reportedItems',
+                element: <ReportedItems></ReportedItems>
             }
             
         ]
