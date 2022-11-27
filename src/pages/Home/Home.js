@@ -33,29 +33,29 @@ const Home = () => {
         }
     })
 
-    const handelAdBook = () =>{
-        if(user?.email){
-        // const filtered = productsCategory?.filter(productCat => {
-        //     return productCat.category_id;
-        //   }) || [];
+    // const handelAdBook = () =>{
+    //     if(user?.email){
+    //     // const filtered = productsCategory?.filter(productCat => {
+    //     //     return productCat.category_id;
+    //     //   }) || [];
 
         
-        //     if(filtered === 1){
-        //         navigate(`/products/${filtered}`);
-        //     }
-        //     else if(filtered === 2){
-        //         navigate(`/products/${filtered}`);
-        //     }
-        //     else if(filtered === 3){
-        //         console.log(filtered);
-        //         navigate(`/products/${filtered}`);
-        //     }
-        navigate('/');
-        }
-        else{
-            navigate('/login');
-        }
-    }
+    //     //     if(filtered === 1){
+    //     //         navigate(`/products/${filtered}`);
+    //     //     }
+    //     //     else if(filtered === 2){
+    //     //         navigate(`/products/${filtered}`);
+    //     //     }
+    //     //     else if(filtered === 3){
+    //     //         console.log(filtered);
+    //     //         navigate(`/products/${filtered}`);
+    //     //     }
+    //     navigate('/');
+    //     }
+    //     else{
+    //         navigate('/login');
+    //     }
+    // }
 
     if (isLoading) {
         return <Loading></Loading>
@@ -125,7 +125,7 @@ const Home = () => {
                                 <div className="card-actions justify-end items-center">
                                     <p>PostedDate: {adv.postedDate}</p>
                                     <p>YearOfUses: {adv.yearsUse} year</p>
-                                    <label onClick={handelAdBook} htmlFor="booknow-modal" className="btn">Book Now</label>
+                                    <label htmlFor="booknow-modal" className="btn">Book Now</label>
                                 </div>
                             </div>
                         </div>

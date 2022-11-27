@@ -6,6 +6,7 @@ import Loading from '../Loading/Loading';
 
 const MyProduct = () => {
     const { user } = useContext(AuthContext);
+    const [myProductAd, setMyProductAd] = useState([]);
 
     const { data: myProducts = [], isLoading, refetch } = useQuery({
         queryKey: ['myProducts'],
@@ -18,21 +19,25 @@ const MyProduct = () => {
 
     // advertising 
     const handelAd = myProduct => {
+        const productId = myProduct._id;
+        delete myProduct._id;
+        console.log(myProduct, productId);
+
         fetch('http://localhost:5000/advertise', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(myProduct)
+            body: JSON.stringify({...myProduct, productId})
         })
             .then(res => res.json())
             .then(result => {
                 console.log(result);
                 if (result.acknowledged) {
-                    toast.success('Advertise Done');
+                    toast.success(`Advertise added successfully`);
                 }
                 else{
-                    toast.error('Already advertise this Item');
+                    toast.error('Already added ');
                 }
             })
     }
