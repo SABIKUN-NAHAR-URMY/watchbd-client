@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import img1 from '../../images/img1.jpg';
 import img2 from '../../images/img2.jpg';
 import img3 from '../../images/img3.jpg';
@@ -8,9 +8,14 @@ import Slider from './Slider/Slider';
 import { useQuery } from '@tanstack/react-query';
 import ProductCategory from './ProductCategory/ProductCategory';
 import Loading from '../Loading/Loading';
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const Home = () => {
-    const { data: productsCategory = [], isLoading} = useQuery({
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const { data: productsCategory = [], isLoading } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/category')
@@ -19,7 +24,40 @@ const Home = () => {
         }
     })
 
-    if(isLoading){
+    const { data: advertise = [] } = useQuery({
+        queryKey: ['advertise'],
+        queryFn: async () => {
+            const res = await fetch('http://localhost:5000/advertise')
+            const data = await res.json();
+            return data;
+        }
+    })
+
+    const handelAdBook = () =>{
+        if(user?.email){
+        // const filtered = productsCategory?.filter(productCat => {
+        //     return productCat.category_id;
+        //   }) || [];
+
+        
+        //     if(filtered === 1){
+        //         navigate(`/products/${filtered}`);
+        //     }
+        //     else if(filtered === 2){
+        //         navigate(`/products/${filtered}`);
+        //     }
+        //     else if(filtered === 3){
+        //         console.log(filtered);
+        //         navigate(`/products/${filtered}`);
+        //     }
+        navigate('/');
+        }
+        else{
+            navigate('/login');
+        }
+    }
+
+    if (isLoading) {
         return <Loading></Loading>
     }
 
@@ -58,7 +96,42 @@ const Home = () => {
 
             {/* Advertise section  */}
             <div>
-                
+                {
+                    advertise.map(adv =>
+                        <div key={adv._id} className="card card-side bg-base-100 shadow-xl mt-10">
+                            <figure><img src={adv.picture} alt="Movie" /></figure>
+                            <div className="card-body">
+                                <h2 className="card-title pb-5">{adv.productName}</h2>
+                                <div className='text-lg'>
+                                    <div className='flex justify-evenly font-semibold pb-5'>
+                                        <p>Seller: {adv.sellerName}</p>
+                                        <p>{adv.status}</p>
+                                        <p>Location: {adv.location}</p>
+                                    </div>
+
+                                    <div className='flex justify-between font-thin pb-5'>
+                                        <p>Phone: {adv.mobileNumber}</p>
+                                        <p>Rating:{adv.rating}</p>
+                                    </div>
+                                    <p className='pb-3'>Available/Sold: {adv.sell}</p>
+
+                                    <div className='flex justify-evenly font-thin pb-5'>
+                                        <p>OriginalPrice:  ${adv.originalPrice}</p>
+                                        <p>ResalePrice:  ${adv.resalePrice}</p>
+                                    </div>
+
+                                    <p><strong>Description:</strong> <span className='font-thin'>{adv.description}</span></p>
+                                </div>
+                                <div className="card-actions justify-end items-center">
+                                    <p>PostedDate: {adv.postedDate}</p>
+                                    <p>YearOfUses: {adv.yearsUse} year</p>
+                                    <label onClick={handelAdBook} htmlFor="booknow-modal" className="btn">Book Now</label>
+                                </div>
+                            </div>
+                        </div>
+                    )
+
+                }
             </div>
 
             {/* category section  */}
@@ -67,8 +140,9 @@ const Home = () => {
                 <div className='mt-8 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
                     {
                         productsCategory.map(category => <ProductCategory
-                        key={category._id}
-                        category={category}></ProductCategory>)
+                            key={category._id}
+                            category={category}
+                        ></ProductCategory>)
                     }
                 </div>
             </div>

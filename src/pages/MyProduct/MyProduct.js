@@ -29,7 +29,10 @@ const MyProduct = () => {
             .then(result => {
                 console.log(result);
                 if (result.acknowledged) {
-                    toast.success(`Advertise added successfully`);
+                    toast.success('Advertise Done');
+                }
+                else{
+                    toast.error('Already advertise this Item');
                 }
             })
     }
