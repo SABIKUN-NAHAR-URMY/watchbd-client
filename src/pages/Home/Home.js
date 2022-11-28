@@ -13,7 +13,7 @@ const Home = () => {
     const { data: productsCategory = [], isLoading } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/category')
+            const res = await fetch('https://watchbd-server.vercel.app/category')
             const data = await res.json();
             return data;
         }
@@ -22,7 +22,7 @@ const Home = () => {
     const { data: advertise = [] } = useQuery({
         queryKey: ['advertise'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/advertise')
+            const res = await fetch('https://watchbd-server.vercel.app/advertise')
             const data = await res.json();
             return data;
         }

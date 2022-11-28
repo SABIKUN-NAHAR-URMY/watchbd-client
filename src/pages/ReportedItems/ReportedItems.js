@@ -7,7 +7,7 @@ const ReportedItems = () => {
     const { data: reportedItems = [], isLoading, refetch } = useQuery({
         queryKey: ['reportedItems'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/reported`)
+            const res = await fetch(`https://watchbd-server.vercel.app/reported`)
             const data = await res.json();
             return data;
         }
@@ -18,7 +18,7 @@ const ReportedItems = () => {
     const handelDelete = id => {
         const agree = window.confirm('Are you sure you want to delete?');
         if (agree) {
-            fetch(`http://localhost:5000/reported/${id}`, {
+            fetch(`https://watchbd-server.vercel.app/reported/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())

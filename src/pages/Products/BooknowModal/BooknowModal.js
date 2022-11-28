@@ -30,7 +30,7 @@ const BooknowModal = ({ bookNow,  setBookNow }) => {
             bookingId: _id
         }
 
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://watchbd-server.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

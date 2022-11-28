@@ -14,7 +14,7 @@ const ProductDisplay = ({ product, setBookNow }) => {
     const [buyerUser, setBuyerUser] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/users/sellerVerify/${email}`)
+        fetch(`https://watchbd-server.vercel.app/users/sellerVerify/${email}`)
             .then(res => res.json())
             .then(data => {
                 setVerifiedData(data);
@@ -22,7 +22,7 @@ const ProductDisplay = ({ product, setBookNow }) => {
     }, [email])
 
     useEffect(() => {
-        fetch('http://localhost:5000/users/allBuyers')
+        fetch('https://watchbd-server.vercel.app/users/allBuyers')
             .then(res => res.json())
             .then(data => {
                 const filtered = data.filter(ud => ud.email === user?.email);
@@ -32,7 +32,7 @@ const ProductDisplay = ({ product, setBookNow }) => {
 
     const handelReport = product => {
         console.log(product);
-        fetch('http://localhost:5000/reported', {
+        fetch('https://watchbd-server.vercel.app/reported', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

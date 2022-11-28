@@ -11,7 +11,7 @@ const MyProduct = () => {
     const { data: myProducts = [], isLoading, refetch } = useQuery({
         queryKey: ['myProducts'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/myProducts/${user?.email}`)
+            const res = await fetch(`https://watchbd-server.vercel.app/myProducts/${user?.email}`)
             const data = await res.json();
             return data;
         }
@@ -23,7 +23,7 @@ const MyProduct = () => {
         delete myProduct._id;
         console.log(myProduct, productId);
 
-        fetch('http://localhost:5000/advertise', {
+        fetch('https://watchbd-server.vercel.app/advertise', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -45,7 +45,7 @@ const MyProduct = () => {
     const handelDelete = myProduct => {
         const agree = window.confirm(`Are you sure you want to delete : ${myProduct.name} ? `);
         if (agree) {
-            fetch(`http://localhost:5000/myProducts/${myProduct._id}`, {
+            fetch(`https://watchbd-server.vercel.app/myProducts/${myProduct._id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())

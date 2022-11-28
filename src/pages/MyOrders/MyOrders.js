@@ -9,7 +9,7 @@ const MyOrders = () => {
     const { data: myOrders = [], isLoading } = useQuery({
         queryKey: ['myOrders'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/myOrders/${user?.email}`)
+            const res = await fetch(`https://watchbd-server.vercel.app/myOrders/${user?.email}`)
             const data = await res.json();
             return data;
         }

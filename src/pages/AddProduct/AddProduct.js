@@ -42,7 +42,7 @@ const AddProduct = () => {
                         email: data.email
                     }
 
-                    fetch('http://localhost:5000/products', {
+                    fetch('https://watchbd-server.vercel.app/products', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',

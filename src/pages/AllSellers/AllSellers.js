@@ -5,14 +5,14 @@ import toast from 'react-hot-toast';
 const AllSellers = () => {
     const [allSellers, setAllSellers] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost:5000/users/allSellers')
+        axios.get('https://watchbd-server.vercel.app/users/allSellers')
             .then(data => {
                 setAllSellers(data.data);
             })
     }, [])
 
     const handelVerify = sellers => {
-        fetch(`http://localhost:5000/users/${sellers._id}`, {
+        fetch(`https://watchbd-server.vercel.app/users/${sellers._id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -32,7 +32,7 @@ const AllSellers = () => {
     const handelDelete = sellers => {
         const agree = window.confirm(`Are you sure you want to delete : ${sellers.name} ? `);
         if (agree) {
-            fetch(`http://localhost:5000/users/allSellers/${sellers._id}`, {
+            fetch(`https://watchbd-server.vercel.app/users/allSellers/${sellers._id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())

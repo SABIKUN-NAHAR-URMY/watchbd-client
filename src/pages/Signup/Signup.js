@@ -39,7 +39,7 @@ const Signup = () => {
 
     const saveUser = (name, email, value) => {
         const user = { name, email, value };
-        fetch('http://localhost:5000/users', {
+        fetch('https://watchbd-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

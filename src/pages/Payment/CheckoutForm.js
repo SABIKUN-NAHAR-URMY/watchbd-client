@@ -12,7 +12,7 @@ const CheckoutForm = ({ booking }) => {
 
 
     useEffect(() => {
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://watchbd-server.vercel.app/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -73,7 +73,7 @@ const CheckoutForm = ({ booking }) => {
                 email,
                 bookingId: bookingId
             }
-            fetch('http://localhost:5000/payments', {
+            fetch('https://watchbd-server.vercel.app/payments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
