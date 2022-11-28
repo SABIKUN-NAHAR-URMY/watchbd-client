@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import img1 from '../../images/img1.jpg';
 import img2 from '../../images/img2.jpg';
 import img3 from '../../images/img3.jpg';
@@ -8,13 +8,8 @@ import Slider from './Slider/Slider';
 import { useQuery } from '@tanstack/react-query';
 import ProductCategory from './ProductCategory/ProductCategory';
 import Loading from '../Loading/Loading';
-import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
-import { useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
 
 const Home = () => {
-    const { user } = useContext(AuthContext);
-    const navigate = useNavigate();
     const { data: productsCategory = [], isLoading } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
@@ -75,7 +70,7 @@ const Home = () => {
                 <h2 className='mt-10 text-center text-xl font-thin'>Please visit our Category Section And Purchase Your Watch </h2>
                 {
                     advertise.map(adv =>
-                        <div key={adv._id} className="card card-side bg-base-100 shadow-xl mt-10">
+                        <div key={adv._id} className="card lg:card-side bg-base-100 shadow-xl mt-10">
                             <figure><img src={adv.picture} alt="Movie" /></figure>
                             <div className='absolute bg-red-600 rounded-lg text-white'>
                                 <h1 className='p-3 font-semibold'>Only for Advertise</h1>
