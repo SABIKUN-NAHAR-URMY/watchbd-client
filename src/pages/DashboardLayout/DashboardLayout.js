@@ -19,7 +19,7 @@ const DashboardLayout = () => {
                 <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content">
                     <h2 className='flex justify-center items-center text-4xl font-bold'>WELCOME TO DASHBOARD</h2>
-                    <Outlet></Outlet>
+                        <Outlet></Outlet>
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>

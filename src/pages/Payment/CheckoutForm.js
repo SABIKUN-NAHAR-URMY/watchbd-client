@@ -9,7 +9,6 @@ const CheckoutForm = ({ booking }) => {
     const [transactionId, setTransactionId] = useState('');
     const [processing, setProcessing] = useState(false);
     const { bookingId, price, email, name } = booking;
-    // console.log(booking);
 
 
     useEffect(() => {

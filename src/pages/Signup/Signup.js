@@ -59,12 +59,12 @@ const Signup = () => {
         .then(result => {
             const user = result.user;
             console.log(user);
-            saveUser(user.displayName, user.email, value);
-            if(user.acknowledged){
+            saveUser(user?.displayName, user?.email, value);
+            if(user?.acknowledged === true){
                 toast.success('Create user successfully');
             }
             else{
-                toast.error('Already User Created');
+                toast.success('Already User Created');
             }
         })
         .catch(error => console.error(error))
