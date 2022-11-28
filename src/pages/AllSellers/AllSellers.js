@@ -24,6 +24,7 @@ const AllSellers = () => {
                 console.log(data);
                 if (data.modifiedCount > 0) {
                     toast.success('Verified Seller');
+                    window.location.reload();
                 }
             })
     }

@@ -1,4 +1,3 @@
-import userEvent from '@testing-library/user-event';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';

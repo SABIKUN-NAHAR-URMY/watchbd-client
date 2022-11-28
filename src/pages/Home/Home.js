@@ -33,30 +33,6 @@ const Home = () => {
         }
     })
 
-    // const handelAdBook = () =>{
-    //     if(user?.email){
-    //     // const filtered = productsCategory?.filter(productCat => {
-    //     //     return productCat.category_id;
-    //     //   }) || [];
-
-        
-    //     //     if(filtered === 1){
-    //     //         navigate(`/products/${filtered}`);
-    //     //     }
-    //     //     else if(filtered === 2){
-    //     //         navigate(`/products/${filtered}`);
-    //     //     }
-    //     //     else if(filtered === 3){
-    //     //         console.log(filtered);
-    //     //         navigate(`/products/${filtered}`);
-    //     //     }
-    //     navigate('/');
-    //     }
-    //     else{
-    //         navigate('/login');
-    //     }
-    // }
-
     if (isLoading) {
         return <Loading></Loading>
     }
@@ -101,21 +77,22 @@ const Home = () => {
                     advertise.map(adv =>
                         <div key={adv._id} className="card card-side bg-base-100 shadow-xl mt-10">
                             <figure><img src={adv.picture} alt="Movie" /></figure>
+                            <div className='absolute bg-red-600 rounded-lg text-white'>
+                                <h1 className='p-3 font-semibold'>Only for Advertise</h1>
+                            </div>
+                            <div className='relative'>
                             <div className="card-body">
                                 <h2 className="card-title pb-5">{adv.productName}</h2>
                                 <div className='text-lg'>
                                     <div className='flex justify-evenly font-semibold pb-5'>
                                         <p>Seller: {adv.sellerName}</p>
-                                        <p>{adv.status}</p>
                                         <p>Location: {adv.location}</p>
                                     </div>
 
                                     <div className='flex justify-between font-thin pb-5'>
-                                        <p>Phone: {adv.mobileNumber}</p>
                                         <p>Rating:{adv.rating}</p>
+                                        <p className='pb-3'>Available/Sold: {adv.sell}</p>
                                     </div>
-                                    <p className='pb-3'>Available/Sold: {adv.sell}</p>
-
                                     <div className='flex justify-evenly font-thin pb-5'>
                                         <p>OriginalPrice:  ${adv.originalPrice}</p>
                                         <p>ResalePrice:  ${adv.resalePrice}</p>
@@ -127,6 +104,7 @@ const Home = () => {
                                     <p>PostedDate: {adv.postedDate}</p>
                                     <p>YearOfUses: {adv.yearsUse} year</p>
                                 </div>
+                            </div>
                             </div>
                         </div>
                     )

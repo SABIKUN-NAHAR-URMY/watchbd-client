@@ -1,24 +1,71 @@
-import React, { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React, { useContext, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import iconVerify from '../../../images/verified.png';
+import Loading from '../../Loading/Loading';
 
 const ProductDisplay = ({ product, setBookNow }) => {
-    const { picture, description, location, mobileNumber, originalPrice, postedDate, productName, rating, resalePrice, sellerName, status, yearsUse, sell } = product;
+    const { user } = useContext(AuthContext);
 
-    const [statusVerify, setStatusVerify] = useState(null);
+    const { picture, description, location, mobileNumber, originalPrice, postedDate, productName, rating, resalePrice, sellerName, status, yearsUse, sell, email } = product;
+
+    const [verifiedData, setVerifiedData] = useState('');
+    const [buyerUser, setBuyerUser] = useState([]);
+
+    // const { data: users = [], isLoading } = useQuery({
+    //     queryKey: ['users'],
+    //     queryFn: async () => {
+    //         const res = await fetch(`http://localhost:5000/users/sellerVerify/${email}`)
+    //         const data = await res.json();
+    //         console.log(data);
+    //         return data;
+    //     }
+    // })
 
     useEffect(() => {
-        fetch('http://localhost:5000/users')
+        fetch(`http://localhost:5000/users/sellerVerify/${email}`)
             .then(res => res.json())
             .then(data => {
-                // const statusSet = data.filter(isVerify => {
-                //     return isVerify.status === "Verified ";
-                // }) || [];
-                // statusSet.map(sv => console.log(sv.status))
-                const set = data.map(sv => sv?.status ? 'Verified' : 'Unverified');
-                setStatusVerify(set);
+                setVerifiedData(data);
             })
-    }, [])
-    console.log(statusVerify);
+    }, [email])
+
+    useEffect(() => {
+        fetch('http://localhost:5000/users/allBuyers')
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data);
+                const filtered = data.filter(ud => ud.email === user?.email);
+                filtered.map(usrD => setBuyerUser(usrD.email));
+            } )
+    }, [user?.email])
+
+console.log(buyerUser);
+    const handelReport = product => {
+        console.log(product);
+        fetch('http://localhost:5000/reported', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(product)
+        })
+            .then(res => res.json())
+            .then(result => {
+                console.log(result);
+                if (result.acknowledged) {
+                    toast.success(`Reported to admin added successfully`);
+                }
+                else {
+                    toast.error('Already added ');
+                }
+            })
+    }
+
+    // if(isLoading){
+    //     <Loading></Loading>
+    // }
 
     return (
         <div className="card bg-base-100 shadow-xl">
@@ -30,7 +77,7 @@ const ProductDisplay = ({ product, setBookNow }) => {
                         <div className='flex items-center pr-5'>
                             <p className='pr-3'>Seller: {sellerName}</p>
                             {
-                                statusVerify ?
+                                verifiedData?.isVerified ?
                                     <>
                                         <p>Verified</p><span><img className='w-4 h-4' src={iconVerify} alt="" /></span>
                                     </>
@@ -58,6 +105,12 @@ const ProductDisplay = ({ product, setBookNow }) => {
                     <p>PostedDate: {postedDate}</p>
                     <p>YearOfUses: {yearsUse} year</p>
                     <label onClick={() => setBookNow(product)} htmlFor="booknow-modal" className="btn">Book Now</label>
+                </div>
+                <div className='text-center'>
+                    {
+                        user?.email === buyerUser &&
+                        <button onClick={() => handelReport(product)} className='w-52 btn btn-sm'>Reported Item</button>
+                    }
                 </div>
             </div>
         </div>
