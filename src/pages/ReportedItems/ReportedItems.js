@@ -26,7 +26,7 @@ const ReportedItems = () => {
                     console.log(data);
                     if (data.deletedCount > 0) {
                         toast.success('Deleted Reported Item successfully.');
-                        return reportedItems.filter(item => item._id !== id) || [];
+                       refetch();
                     }
                 })
         }
@@ -43,7 +43,7 @@ const ReportedItems = () => {
                         <tr>
                             <th></th>
                             <th>Product Name</th>
-                            <th>Email Address</th>
+                            <th>Seller Email Address</th>
                             <th>Action</th>
                         </tr>
                     </thead>

@@ -13,16 +13,6 @@ const ProductDisplay = ({ product, setBookNow }) => {
     const [verifiedData, setVerifiedData] = useState('');
     const [buyerUser, setBuyerUser] = useState([]);
 
-    // const { data: users = [], isLoading } = useQuery({
-    //     queryKey: ['users'],
-    //     queryFn: async () => {
-    //         const res = await fetch(`http://localhost:5000/users/sellerVerify/${email}`)
-    //         const data = await res.json();
-    //         console.log(data);
-    //         return data;
-    //     }
-    // })
-
     useEffect(() => {
         fetch(`http://localhost:5000/users/sellerVerify/${email}`)
             .then(res => res.json())
@@ -35,13 +25,11 @@ const ProductDisplay = ({ product, setBookNow }) => {
         fetch('http://localhost:5000/users/allBuyers')
             .then(res => res.json())
             .then(data => {
-                // console.log(data);
                 const filtered = data.filter(ud => ud.email === user?.email);
                 filtered.map(usrD => setBuyerUser(usrD.email));
             } )
     }, [user?.email])
 
-console.log(buyerUser);
     const handelReport = product => {
         console.log(product);
         fetch('http://localhost:5000/reported', {
@@ -63,9 +51,6 @@ console.log(buyerUser);
             })
     }
 
-    // if(isLoading){
-    //     <Loading></Loading>
-    // }
 
     return (
         <div className="card bg-base-100 shadow-xl">
