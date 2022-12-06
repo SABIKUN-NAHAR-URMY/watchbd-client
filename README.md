@@ -12,6 +12,9 @@
 11. Node , expressJs also used
 
 # This is my project named WatchBD
+adminEmail: mili@gmail.com
+
+adminPassword: 123456@A
 
 # GitHub code link :
 1. client side: [Github](https://github.com/programming-hero-web-course-4/b612-used-products-resale-clients-side-SABIKUN-NAHAR-URMY)
