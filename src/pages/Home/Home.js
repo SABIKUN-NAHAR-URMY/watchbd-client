@@ -1,7 +1,7 @@
 import React from 'react';
-import img1 from '../../images/img1.jpg';
-import img2 from '../../images/img2.jpg';
-import img3 from '../../images/img3.jpg';
+import img1 from '../../images/watch1.jpg';
+import img2 from '../../images/watch2.jpg';
+import img3 from '../../images/watch3.jpg';
 import delivery from '../../images/delivery.jpg';
 import paymentSecure from '../../images/paymentSecure.jpg';
 import Slider from './Slider/Slider';
@@ -54,10 +54,10 @@ const Home = () => {
 
     ]
     return (
-        <div className='mt-8'>
+        <div className=''>
             {/* slider section */}
 
-            <div className="carousel w-full rounded-lg">
+            <div className="carousel bg-slate-50 w-full">
                 {
                     sliderItem.map(slider => <Slider
                         key={slider.id}
@@ -66,7 +66,7 @@ const Home = () => {
             </div>
 
             {/* Advertise section  */}
-            <div>
+            <div className='w-[80%] mx-auto'>
                 <h2 className='mt-10 text-center text-xl font-thin'>Please visit our Category Section And Purchase Your Watch </h2>
                 {
                     advertise.map(adv =>
@@ -108,7 +108,7 @@ const Home = () => {
             </div>
 
             {/* category section  */}
-            <div className='mt-10'>
+            <div className='mt-10 w-[80%] mx-auto'>
                 <h1 className='text-4xl font-bold text-center'>WATCHES CATEGORIES</h1>
                 <div className='mt-8 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
                     {
@@ -121,7 +121,7 @@ const Home = () => {
             </div>
 
             {/* extra one section  */}
-            <div className='mt-8 grid gap-6 grid-cols-1 lg:grid-cols-2'>
+            <div className='mt-8 grid gap-6 grid-cols-1 lg:grid-cols-2 w-[80%] mx-auto'>
                 <div>
                     <img src={delivery} className='rounded-lg' alt="" />
                     <h1 className='text-3xl font-bold'>Delivery</h1>
