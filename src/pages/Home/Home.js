@@ -10,7 +10,7 @@ import img7 from '../../images/internet.png';
 import aboutImg from '../../images/aboutSection.jpg';
 import vission from '../../images/vission.jpg';
 import mission from '../../images/mission.jpg';
-import goal from '../../images/goal.jpg';
+import watchImg from '../../images/watchImg.jpg';
 import paymentSecure from '../../images/paymentSecure.jpg';
 import Slider from './Slider/Slider';
 import { useQuery } from '@tanstack/react-query';
@@ -181,12 +181,13 @@ const Home = () => {
             <div className='bg-slate-200'>
                 {/* about section  */}
                 <div className='grid lg:grid-cols-2'>
-                    <div>
-                        <img className='rounded-lg shadow-xl w-full h-80 ' src={vission} alt="" />
-                        <div className='grid grid-cols-2 gap-4'>
+                    <div className='grid grid-cols-2 gap-2'>
+                        <img className='rounded-lg shadow-xl p-6 h-72' src={vission} alt="" />
+                        <img className='rounded-lg shadow-xl p-6 h-72' src={watchImg} alt="" />
+                        
                             <img className='rounded-lg shadow-xl p-6' src={mission} alt="" />
                             <img className='rounded-lg shadow-xl p-6' src={aboutImg} alt="" />
-                        </div>
+                        
                     </div>
                     <div className='m-16'>
                         <h1 className='text-3xl font-serif mb-4'>WELCOME TO <span className='text-slate-800 font-bold'>WatchBD</span></h1>
