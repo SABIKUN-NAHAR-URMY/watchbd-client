@@ -12,7 +12,6 @@
 11. Node , expressJs also used
 
 # This is my project named WatchBD
-
 adminEmail: mili@gmail.com
 
 adminPassword: 123456@A
